@@ -3,6 +3,7 @@ import MarketTicker from "@/components/MarketTicker";
 import SearchBar from "@/components/SearchBar";
 import StockCard from "@/components/StockCard";
 import NewsCard from "@/components/NewsCard";
+import PredictionResults from "@/components/PredictionResults";
 
 const Index = () => {
   const [featuredStocks] = useState([
@@ -44,14 +45,25 @@ const Index = () => {
     },
   ]);
 
+  // Example prediction data - in a real app, this would come from an API
+  const [predictionData] = useState({
+    symbol: "RELIANCE",
+    predictions: [
+      { date: "2024-01", price: 2400 },
+      { date: "2024-02", price: 2450 },
+      { date: "2024-03", price: 2500 },
+      { date: "2024-04", price: 2480 },
+      { date: "2024-05", price: 2520 },
+      { date: "2024-06", price: 2600 },
+    ],
+    trend: "up" as const,
+    insight: "Based on our comprehensive analysis of Reliance Industries (RELIANCE), the stock shows strong potential for growth in the coming months. The company's robust fundamentals, including steady revenue growth and strategic investments in digital and retail segments, support a bullish outlook. Market sentiment remains positive, backed by institutional investor confidence and stable macroeconomic factors. Technical indicators suggest a continued upward trend, with key resistance levels likely to be tested. However, investors should monitor global oil prices and regulatory changes that could impact the company's petrochemical business. The diversified business model and strong leadership position in multiple sectors provide a safety net against market volatility. Our AI models predict a steady appreciation in stock value, with potential for 8-10% growth over the next quarter, subject to market conditions and execution of planned initiatives.",
+  });
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Market Ticker */}
       <MarketTicker />
-
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8 space-y-8">
-        {/* Hero Section */}
         <div className="text-center space-y-4 animate-slide-up">
           <h1 className="text-4xl font-bold">
             Smart Stock Predictions
@@ -61,12 +73,12 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Search */}
         <div className="my-8">
           <SearchBar />
         </div>
 
-        {/* Featured Stocks */}
+        <PredictionResults stockData={predictionData} />
+
         <section>
           <h2 className="text-2xl font-semibold mb-4">Featured Stocks</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -76,7 +88,6 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Market News */}
         <section>
           <h2 className="text-2xl font-semibold mb-4">Market News</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
