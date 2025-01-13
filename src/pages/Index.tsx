@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { LogIn, UserPlus } from "lucide-react";
 import MarketTicker from "@/components/MarketTicker";
 import SearchBar from "@/components/SearchBar";
 import StockCard from "@/components/StockCard";
@@ -45,7 +48,6 @@ const Index = () => {
     },
   ]);
 
-  // Example prediction data - in a real app, this would come from an API
   const [predictionData] = useState({
     symbol: "RELIANCE",
     predictions: [
@@ -62,6 +64,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-end gap-4 mb-4">
+          <Link to="/login">
+            <Button variant="outline" className="gap-2">
+              <LogIn className="h-4 w-4" />
+              Login
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button className="bg-gradient-to-r from-purple-600 to-blue-500 gap-2">
+              <UserPlus className="h-4 w-4" />
+              Sign Up
+            </Button>
+          </Link>
+        </div>
+      </div>
+      
       <MarketTicker />
       <main className="container mx-auto px-4 py-8 space-y-8">
         <div className="text-center space-y-4 animate-slide-up">
