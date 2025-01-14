@@ -17,11 +17,6 @@ const feedbackSchema = z.object({
 
 type FeedbackForm = z.infer<typeof feedbackSchema>;
 
-interface FeedbackEntry extends FeedbackForm {
-  id: string;
-  timestamp: string;
-}
-
 const Feedback = () => {
   const { toast } = useToast();
 
@@ -34,27 +29,20 @@ const Feedback = () => {
     },
   });
 
-  const saveFeedbackToStorage = (feedback: FeedbackForm) => {
-    const feedbackEntry: FeedbackEntry = {
-      ...feedback,
-      id: crypto.randomUUID(),
-      timestamp: new Date().toISOString(),
-    };
-
-    // Get existing feedback from localStorage
-    const existingFeedback = JSON.parse(localStorage.getItem("feedback") || "[]");
-    
-    // Add new feedback to the array
-    const updatedFeedback = [feedbackEntry, ...existingFeedback];
-    
-    // Save back to localStorage
-    localStorage.setItem("feedback", JSON.stringify(updatedFeedback));
-  };
-
   const onSubmit = async (data: FeedbackForm) => {
     try {
-      saveFeedbackToStorage(data);
-      
+      const response = await fetch('http://localhost:3001/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit feedback');
+      }
+
       toast({
         title: "Feedback Submitted",
         description: "Thank you for your feedback!",
