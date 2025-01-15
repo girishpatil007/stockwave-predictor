@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Feedback from "./pages/Feedback";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </TooltipProvider>

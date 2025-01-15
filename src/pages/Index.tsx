@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus, MessageSquare } from "lucide-react";
+import { LogIn, UserPlus, MessageSquare, UserCircle } from "lucide-react";
 import MarketTicker from "@/components/MarketTicker";
 import SearchBar from "@/components/SearchBar";
 import StockCard from "@/components/StockCard";
@@ -66,6 +66,12 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-end gap-4 mb-4">
+          <Link to="/profile">
+            <Button variant="outline" className="gap-2">
+              <UserCircle className="h-4 w-4" />
+              Account
+            </Button>
+          </Link>
           <Link to="/feedback">
             <Button variant="outline" className="gap-2">
               <MessageSquare className="h-4 w-4" />
